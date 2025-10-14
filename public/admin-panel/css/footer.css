@@ -1,0 +1,339 @@
+.footer-container {
+    margin-top: 10px;
+    width: 100%;
+    background: #333;
+    clear: both;
+    position: relative;
+    z-index: 10;
+}
+.footer-row {
+    margin-top: 30px;
+}
+.footer-col {
+    color: #ababab;
+    font-size: 11px;
+}
+.footer-col a {
+    color: #dcdcdc;
+    font-weight: bold;
+}
+.footer-col a:hover {
+    color: #d8450b;
+    text-decoration: none;
+}
+.footer-col h5,
+.footer-col strong {
+    color: #f9f9f9;
+    text-shadow: none;
+}
+
+.footer-col ul {
+    margin: 0;
+}
+.footer-col ul li {
+    list-style: none;
+    padding-bottom: 20px;
+}
+.footer-col ul.post-list li {
+    border-bottom: 1px dashed #504f4f;
+    padding: 10px 0;
+}
+/* All Mobile Sizes */
+@media only screen and (max-width: 767px) {
+    .footer-col {
+        clear: both;
+        overflow: auto;
+        margin-bottom: 20px;
+        width: 100% !important;
+    }
+
+    .footerContainer {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+
+    .footer-sub .right {
+        display: none;
+    }
+}
+ul.img-feed li {
+    float: left;
+    margin: 0 7px 7px 0;
+    padding-bottom: 0;
+}
+
+/* Portrait tablet */
+@media (min-width: 768px) and (max-width: 979px) {
+    ul.img-feed li:nth-last-child(-n + 4) {
+        display: none;
+    }
+}
+
+/**** Social Icons ****/
+.social-icons {
+    padding: 0;
+}
+.social-icons li {
+    list-style: none;
+    float: left;
+    margin-right: 6px;
+}
+/* Small Monitor */
+@media (min-width: 980px) and (max-width: 1199px) {
+    .social-icons li:last-child {
+        display: none;
+    }
+}
+
+a.social-icon {
+    background: url(../img/social.png);
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+a.facebook {
+    background-position: -66px 56px;
+}
+a.facebook:hover {
+    background-position: -66px -13px;
+}
+
+a.twitter {
+    background-position: 120px 56px;
+}
+a.twitter:hover {
+    background-position: 116px -13px;
+}
+
+a.instagram {
+    background-position: 240px 56px;
+}
+a.instagram:hover {
+    background-position: 240px -13px;
+}
+
+a.telegram {
+    background-position: -5px 56px;
+}
+a.telegram:hover {
+    background-position: -5px -13px;
+}
+
+a.linkeden {
+    background-position: 177px 56px;
+}
+a.linkeden:hover {
+    background-position: 177px -13px;
+}
+
+/**** Sub Footer ****/
+.footer-sub {
+    background: #1f1f1f;
+    padding: 10px 0;
+}
+.footer-sub div div span {
+    padding: 0 20px;
+}
+
+/**************************************
+/ MISC
+**************************************/
+.row {
+    margin-bottom: 10px;
+}
+.sub-row30 {
+    margin-bottom: 30px;
+}
+.sub-row20 {
+    margin-bottom: 20px;
+}
+.no-margin {
+    margin-bottom: 0;
+}
+
+a.accordion-toggle {
+    background: #f5f5f5;
+}
+.nav-tabs li.active a {
+    background: #eaeaea;
+}
+
+@media only screen and (max-width: 767px) {
+    .btn {
+        margin-bottom: 20px;
+    }
+}
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.align-left {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+.align-right {
+    float: right;
+    margin: 0 0 20px 20px;
+}
+
+.color-bg {
+    background: #d8450b;
+}
+.color {
+    color: #d8450b;
+}
+.color-bar-1,
+.color-bar-2 {
+    width: 100%;
+}
+.color-bar-1 {
+    background: #414141;
+    height: 5px;
+}
+.color-bar-2 {
+    height: 3px;
+}
+.page-header {
+    margin: 0;
+}
+.lead {
+    line-height: 28px;
+    margin: 20px 0 30px 0;
+    text-align: left;
+}
+
+#toTop {
+    width: 47px;
+    height: 47px;
+    background: url(../img/back-top-btn.png) no-repeat;
+    text-align: center;
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    cursor: pointer;
+    display: none;
+    text-indent: -9999px;
+    z-index: 12;
+}
+/***** Lightbox *****/
+#lightbox-image-details-caption {
+    font-family: "Oswald", sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+#lightbox-secNav-btnClose {
+    width: 30px;
+    padding-bottom: 0;
+}
+#lightbox-image-details-currentNumber {
+    display: none;
+    visibility: hidden;
+}
+
+/***** Testimonials *****/
+.quote-text {
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    margin: 0 20px;
+}
+.quote-text cite {
+    font-size: 12px;
+    color: #999;
+    display: block;
+    margin-top: 5px;
+}
+
+#clientCarousel.carousel .item {
+    background: #f9f9f9;
+    padding: 20px 0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    left: 0 !important;
+}
+#clientCarousel.carousel .next.left,
+.carousel .prev.right {
+    opacity: 1;
+    z-index: 1;
+}
+#clientCarousel.carousel .active.left,
+.carousel .active.right {
+    opacity: 0;
+    z-index: 2;
+}
+
+/***** Client Logos *****/
+.client-link {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+.client-mask {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background: url(../img/rnd-client-mask.png);
+}
+.client-logos {
+    margin: 20px 0 0 0;
+}
+.client-logos li {
+    list-style: none;
+    float: left;
+    margin: 0 7px;
+}
+
+/* Small Monitor */
+@media (min-width: 980px) and (max-width: 1199px) {
+    .client-logos li:first-child {
+        display: none;
+    }
+}
+/* Portrait tablet */
+@media (min-width: 768px) and (max-width: 979px) {
+    .client-logos li:nth-last-child(-n + 2) {
+        display: none;
+    }
+}
+
+/***** Features Page (these can be deleted)*****/
+.the-grid div {
+    background: #e4e4e4;
+    padding: 10px 0;
+    text-align: center;
+}
+.form-examples input {
+    margin-bottom: 10px;
+}
+.the-icons {
+    list-style: none;
+    margin-left: 0;
+}
+.the-icons li {
+    float: left;
+    width: 25%;
+    line-height: 25px;
+}
+
+/* Mobile Portrait Size to Tablet Portrait Size */
+@media only screen and (max-width: 767px) {
+    .the-icons li {
+        float: none;
+        width: 100%;
+        line-height: 25px;
+    }
+}
+
+.img-feed {
+    padding: 0;
+}

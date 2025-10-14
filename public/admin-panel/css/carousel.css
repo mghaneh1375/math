@@ -1,0 +1,86 @@
+
+/* Carousel */
+.owl-theme .owl-controls {
+    margin-top: 0;
+}
+.owl-theme .owl-controls .owl-page span {
+    background: #7697a2 none repeat scroll 0 0;
+    border-radius: 0;
+    height: 3px;
+    margin: 0 1px;
+    width: 30px;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #7697a2!important;
+    border: 1px solid #7697a2;
+    border-radius: 0;
+    font-family: mfg;
+    height: 40px;
+    line-height: 40px;
+    margin-top: -20px;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 40px;
+}
+.carousel-bottom-arrows.owl-theme .owl-controls .owl-buttons div {
+    bottom: 0;
+    top: auto;
+}
+.owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+}
+.owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0;
+}
+.carousel-wide-arrows.owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: -60px;
+}
+.carousel-wide-arrows.owl-theme .owl-controls .owl-buttons .owl-next {
+    right: -60px;
+}
+.carousel-nav-white.owl-theme .owl-controls .owl-page span {
+    background: #fff none repeat scroll 0 0;
+}
+.carousel-nav-white.owl-theme .owl-controls .owl-buttons div {
+    color: #fff!important;
+    border: 1px solid #fff;
+}
+.carousel-main .carousel-content {
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+.owl-pagination {
+    margin-top: 0.625rem;
+}
+.carousel-main .owl-pagination {
+    bottom: 0;
+    padding: 1.25rem 0;
+    position: absolute;
+    width: 100%;
+}
+.carousel-blocks {
+    padding: 0 3rem;
+}
+.carousel-blocks .owl-item {
+    padding: 0 0.625rem;
+}
+.carousel-hide-arrows .owl-buttons, .carousel-hide-pagination .owl-pagination {
+    display:none;
+}
+.carousel-3-blocks {
+    padding: 0 3rem;
+}
+.carousel-3-blocks .owl-item {
+    padding: 0 0.625rem;
+}
