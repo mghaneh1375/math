@@ -65,7 +65,7 @@ class SubscriptionController extends Controller
         //
     }
 
-    public static function hasAccess(int $userId, array $gradeIds) : bool {
+    public static function hasAccess(int $userId, $gradeIds) : bool {
         $subsciption = Subscription::whereUserId($userId)->where('expire_at', '>=', Carbon::now())->with('subscription_package')->first();
         if($subsciption != null &&
             (

@@ -14,6 +14,10 @@ class PublicCourseSessionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'title' => $this->title,
+            'chapter' => $this->chapter,
+            'duration' => sprintf('%02d:%02d', floor($this->duration / 60) % 60, $this->duration % 60) . ' دقیقه ',
+        ];
     }
 }

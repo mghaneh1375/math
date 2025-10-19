@@ -82,8 +82,9 @@ class CourseController extends Controller
                     'sessions' => function ($query) {
                         $query->ready();
                     }, 'tags', 'seo_tags', 'lessons'
-                ])),
-                'seo_tags' => PublicSeoTag::all()
+                ])->withCount(['attaches'])->whereId($course->id)->first())->toArray($request),
+                'seo_tags' => PublicSeoTag::all(),
+                'is_owner' => true,
             ]);
     }
 

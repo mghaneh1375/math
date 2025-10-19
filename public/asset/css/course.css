@@ -1,0 +1,95 @@
+.courses-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    row-gap: 20px;
+    direction: rtl;
+}
+
+.course-card {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    height: 500px;
+    background-color: white;
+    box-shadow: 5px 5px 20px gray;
+    border-radius: 8px;
+    gap: 10px;
+    direction: rtl;
+    padding: 10px;
+    position: relative;
+}
+
+.course-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.course-card p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.course-card img {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.course-info {
+    margin-top: 220px;
+}
+
+.course-action {
+    display: flex;
+    justify-content: end;
+    justify-items: end;
+    align-items: end;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.course-desc {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.course-detail-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-right: 1px solid #ccc;
+}
+
+.course-detail-info p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.chapter {
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 5px 5px 20px gray;
+    cursor: pointer;
+}
+
+.session {
+    margin-right: 20px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -26,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('root');
+Route::get('/', [HomeController::class, 'home'])->name('root');
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], function() {

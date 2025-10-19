@@ -1,0 +1,64 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+div {
+    font-family: IRANSans;
+}
+
+body {
+    direction: rtl;
+}
+
+.titr {
+    font-size: 24px;
+    font-weight: bolder;
+    text-align: center;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.justify-content-space-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.f-row {
+    flex-direction: row;
+}
+
+.g-10 {
+    gap: 10px;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.bi {
+    vertical-align: -0.125em;
+    fill: currentColor;
+}
+
+.content-container {
+    min-height: calc(100vh - 130px - 2rem);
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}

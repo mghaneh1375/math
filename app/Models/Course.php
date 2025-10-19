@@ -71,9 +71,13 @@ class Course extends Model
         return $this->hasMany(Purchase::class);
     }
     
-    public function scopeVisible(Builder $query): void
+    public function scopeVisible($query): void
     {
         $query->where('visibility', true);
     }
 
+    public function scopeHasSession($query): void
+    {
+        $query->has('sessions');
+    }
 }

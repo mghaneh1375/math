@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CoursePublicResource;
+use App\Models\Course;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,8 +24,15 @@ class HomeController extends Controller
         return redirect()->route('login');
     }
 
-    public function home() {
-        return view('home');
+    public function home(Request $request) {
+        return view('home', [
+            'courses' => CoursePublicResource::collection(
+                Course::visible()->hasSession()
+                    ->withCount(['sessions' => function ($query) {
+                        $query->ready();
+                    }])->get()
+                )->toArray($request)
+        ]);
     }
 
     public function contactUs() {

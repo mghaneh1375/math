@@ -18,7 +18,7 @@ class AdminCourseSessionDigestResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'duration' => sprintf('%02d:%02d', floor($this->duration / 60) % 60, $this->duration % 60),
+            'duration' => sprintf('%02d:%02d', floor($this->duration / 60) % 60, $this->duration % 60) . 'دقیقه ',
             'chapter' => $this->chapter,
             'chunked_at' => $this->chunked_at,
             'attaches_count' => $this->attaches_count,

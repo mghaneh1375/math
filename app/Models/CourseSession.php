@@ -40,7 +40,7 @@ class CourseSession extends Model
         return $this->hasMany(SessionSeoTag::class, 'session_id', 'id');
     }
 
-    public function scopeReady(Builder $query): void
+    public function scopeReady($query): void
     {
         $query->where('visibility', true)
             ->where(function ($query) {
