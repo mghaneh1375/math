@@ -74,17 +74,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
 Route::group(['prefix' => 'course', 'middleware' => ['auth']], function() {
 
     Route::get('list', [CourseController::class, 'myCourses'])->name('my_courses');
-    
+
+});
+
+Route::group(['prefix' => 'public'], function() {
+
+    Route::get('list', [CourseController::class, 'index'])->name('public_course_list');
+
     Route::get('show/{course}', [CourseController::class, 'show'])->name('course.show');
 
 });
 
-Route::group(['prefix' => 'public', 'middleware' => ['auth']], function() {
-
-    Route::get('list', [CourseController::class, 'index'])->name('public_course_list');
-
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
-});
-
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('login', [AuthController::class, 'login'])->name('login');

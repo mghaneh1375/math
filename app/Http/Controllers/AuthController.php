@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     public function login() {
-        Auth::login(User::find(1));
-        // Auth::login(User::find(2));
+        // Auth::login(User::find(1));
+        Auth::login(User::find(2));
         return redirect()->route('config.index');
         // return view('auth.login');
     }

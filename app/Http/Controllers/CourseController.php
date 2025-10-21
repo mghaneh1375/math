@@ -63,18 +63,28 @@ class CourseController extends Controller
      */
     public function show(Course $course, Request $request)
     {
+        // dd(PurchasedCourseResource::make($course->with([
+        //             'sessions' => function ($query) {
+        //                 $query->ready();
+        //             },
+        //             'attaches', 'tags', 'seo_tags', 'lessons'
+        //         ])->whereId($course->id)->first())->toArray($request));
         if(
-            Purchase::whereCourseId($course->id)->whereUserId($request->user()->id)->count() > 0 ||
-            SubscriptionController::hasAccess($request->user()->id, $course->lessons()->distinct()->pluck('grade_id'))
+            $request->user() != null &&
+            (
+                Purchase::whereCourseId($course->id)->whereUserId($request->user()->id)->count() > 0 ||
+                SubscriptionController::hasAccess($request->user()->id, $course->lessons()->distinct()->pluck('grade_id'))
+            )
         ) {
-            return view('student.course.show', [
+            return view('public.course.show', [
                 'item' => PurchasedCourseResource::make($course->with([
                     'sessions' => function ($query) {
                         $query->ready();
                     },
                     'attaches', 'tags', 'seo_tags', 'lessons'
-                ])->first())->toArray($request),
-                'seo_tags' => PublicSeoTag::all()
+                ])->whereId($course->id)->first())->toArray($request),
+                'seo_tags' => PublicSeoTag::all(),
+                'is_owner' => true,
             ]);
         }
         return view('public.course.show', [
@@ -84,7 +94,7 @@ class CourseController extends Controller
                     }, 'tags', 'seo_tags', 'lessons'
                 ])->withCount(['attaches'])->whereId($course->id)->first())->toArray($request),
                 'seo_tags' => PublicSeoTag::all(),
-                'is_owner' => true,
+                'is_owner' => false,
             ]);
     }
 
@@ -145,7 +155,7 @@ class CourseController extends Controller
     public function myCourses(Request $request)
     {
         return view('student.course.list', [
-            'items' => CoursePublicResource::collection(
+            'courses' => CoursePublicResource::collection(
                 Purchase::whereUserId($request->user()->id)
                     ->with('course')
                     ->get()

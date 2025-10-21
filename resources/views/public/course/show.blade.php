@@ -5,6 +5,15 @@
     <link rel="stylesheet" href="{{ asset('asset/css/course.css') }}" />
 @show
 
+@section('meta_tags')
+    @foreach($seo_tags as $seo_tag)
+        <meta name="{{ $seo_tag->key }}" content="{{ $seo_tag->value }}" />
+    @endforeach
+    @foreach($item['seo_tags'] as $seo_tag)
+        <meta name="{{ $seo_tag['key'] }}" content="{{ $seo_tag['value'] }}" />
+    @endforeach
+@stop
+
 @section('content')
     <div class="course-detail-container">
         <div class="d-flex f-row">
@@ -19,13 +28,23 @@
                 <h2 class="titr">اطلاعات کلی دوره</h2>
                 <div class="d-flex justify-content-space-between"><p>تعداد جلسات</p><p>{{ sizeof($item['sessions']) }}</p></div>
                 <div class="d-flex justify-content-space-between"><p>مدت دوره</p><p>{{ $item['duration'] }}</p></div>
-                <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ $item['attaches_count'] }}</p></div>
+                @if(isset($item['attaches_count']))
+                    <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ $item['attaches_count'] }}</p></div>
+                @elseif(isset($item['attaches']))
+                    <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ sizeof($item['attaches']) }}</p></div>
+                @endif
                 <div class="d-flex f-row g-10">
                     {{ implode(' - ', array_map(function($e) {return "#" . $e; }, $item['tags'])) }} 
                 </div>
-                <div class="d-flex f-row justify-content-end">
-                    <button class="btn btn-primary">خرید دوره</button>
-                </div>
+                @if(!$is_owner)
+                    <div class="d-flex f-row justify-content-end">
+                        @if(Auth::check())
+                            <button class="btn btn-primary">خرید دوره</button>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-primary">ورود به سایت برای خرید دوره</a>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
         <h2 class="titr">جلسات دوره</h2>

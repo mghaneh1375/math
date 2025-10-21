@@ -11,15 +11,19 @@
                 <input type="search" placeholder="جستجو..." aria-label="جستجو">
             </div>
             
-            <div class="account-menu" id="accountMenu">
-                <button id="accountToggle" aria-expanded="false" aria-controls="accountPane">حساب من</button>
-                <div class="account-pane" id="accountPane" role="menu" aria-hidden="true">
-                <a href="#" role="menuitem">تراکنش‌های من</a>
-                <a href="#" role="menuitem">دوره‌های من</a>
-                <a href="#" role="menuitem">تغییر رمزعبور</a>
-                <a href="#" role="menuitem">خروج</a>
-                </div>
-            </div>
+            @if(Auth::check())
+              <div class="account-menu" id="accountMenu">
+                  <button id="accountToggle" aria-expanded="false" aria-controls="accountPane">حساب من</button>
+                  <div class="account-pane" id="accountPane" role="menu" aria-hidden="true">
+                  <a href="#" role="menuitem">تراکنش‌های من</a>
+                  <a href="{{ route('my_courses') }}" role="menuitem">دوره‌های من</a>
+                  <a href="#" role="menuitem">تغییر رمزعبور</a>
+                  <a href="{{ route('logout') }}" role="menuitem">خروج</a>
+                  </div>
+              </div>
+            @else
+              <a href="{{ route('login') }}" role="menuitem">ورود/ثبت‌نام</a>
+            @endif
             <div class="logo">لوگو</div>
         </div>
     </div>
