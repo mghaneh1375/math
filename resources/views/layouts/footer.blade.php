@@ -23,6 +23,8 @@
         <path d="M20.52 3.48A11.911 11.911 0 0012.022 0C5.373 0 .17 5.18.169 11.592c0 2.045.536 4.041 1.553 5.784L0 24l6.713-1.757a11.563 11.563 0 005.318 1.367h.005c6.648 0 12.048-5.3 12.05-11.828a11.88 11.88 0 00-3.565-8.302zM12.022 21.66a9.95 9.95 0 01-5.132-1.448l-.37-.22-3.978 1.04 1.06-3.894-.24-.382a9.96 9.96 0 01-1.524-5.354c0-5.523 4.48-10.01 10.003-10.01 2.675 0 5.188 1.043 7.078 2.94a9.923 9.923 0 012.936 7.086c-.003 5.52-4.48 10.012-10.093 10.012z"/>
       </svg>
     </a>
+
+    <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=662717&Code=yQY4VMYvmM4fFabD8FUtPBu58ZLor3Zb'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=662717&Code=yQY4VMYvmM4fFabD8FUtPBu58ZLor3Zb' alt='' style='cursor:pointer' code='yQY4VMYvmM4fFabD8FUtPBu58ZLor3Zb'></a>
   </div>
   <div style="font-size: 14px;">
     &copy; 2025 ریاضی زوم - کلیه حقوق این سایت به سرکار خانم شصتی متعلق است
