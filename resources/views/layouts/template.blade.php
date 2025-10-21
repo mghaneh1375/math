@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="fa">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         @yield('meta_tags')
         @section('header')
             <link rel="stylesheet" href="{{ asset('admin-panel/css/bootstrap.min.css') }}">

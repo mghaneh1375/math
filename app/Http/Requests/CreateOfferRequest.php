@@ -29,10 +29,10 @@ class CreateOfferRequest extends FormRequest
         return [
             'type' => ['bail', 'required', Rule::in([OffCodeType::PERCENT, OffCodeType::VALUE])],
             'value' => 'bail|required|integer|min:1|max:9999999999',
-            'code' => 'bail|string|min:5|max:10',
             'course_id' => ['bail', 'integer', 'min:1', 'exists:courses,id'],
             'lesson_id' => ['bail', 'integer', 'min:1', 'exists:lessons,id'],
             'grade_id' => ['bail', 'integer', 'min:1', 'exists:grades,id'],
+            'start_at' => ['nullable', new MyJalaliValidator, new MyJalaliDateAfterValidator(self::getToday())],
             'expire_at' => ['nullable', new MyJalaliValidator, new MyJalaliDateAfterValidator(self::getToday())],
         ];
     }

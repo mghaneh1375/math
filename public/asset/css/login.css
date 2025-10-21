@@ -1,0 +1,73 @@
+.login-container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 30px auto;
+}
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+.input-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-size: 14px;
+}
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.buttons button:nth-child(1) {
+    background-color: #4a90e2;
+}
+.buttons button:nth-child(2) {
+    background-color: #e24a84;
+}
+button:hover {
+    background-color: #357abd;
+}
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+}
+.forgot-password a {
+    text-decoration: none;
+    color: #4a90e2;
+    font-size: 14px;
+}
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}

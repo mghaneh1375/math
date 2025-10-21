@@ -86,4 +86,7 @@ Route::group(['prefix' => 'public'], function() {
 });
 
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
 Route::get('login', [AuthController::class, 'login'])->name('login');
+
+Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
