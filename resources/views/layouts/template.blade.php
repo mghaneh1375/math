@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('asset/img/logo.png') }}">
+        <title>ریاضی زوم</title>
         @yield('meta_tags')
         @section('header')
             <link rel="stylesheet" href="{{ asset('admin-panel/css/bootstrap.min.css') }}">

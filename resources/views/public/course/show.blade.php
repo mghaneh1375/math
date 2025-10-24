@@ -21,30 +21,38 @@
                 <h2>{{ $item['title'] }}</h2>
                 <div class="d-flex f-row g-10">
                     <img width="400px" src="{{ $item['img'] }}" />
-                    {!! $item['description'] !!}
+                    <div>
+                        {!! $item['description'] !!}
+                    </div>
                 </div>
             </div>
             <div class="course-detail-info col-md-3 col-xs-12">
                 <h2 class="titr">اطلاعات کلی دوره</h2>
-                <div class="d-flex justify-content-space-between"><p>تعداد جلسات</p><p>{{ sizeof($item['sessions']) }}</p></div>
-                <div class="d-flex justify-content-space-between"><p>مدت دوره</p><p>{{ $item['duration'] }}</p></div>
-                @if(isset($item['attaches_count']))
-                    <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ $item['attaches_count'] }}</p></div>
-                @elseif(isset($item['attaches']))
-                    <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ sizeof($item['attaches']) }}</p></div>
-                @endif
-                <div class="d-flex f-row g-10">
-                    {{ implode(' - ', array_map(function($e) {return "#" . $e; }, $item['tags'])) }} 
-                </div>
-                @if(!$is_owner)
-                    <div class="d-flex f-row justify-content-end">
-                        @if(Auth::check())
-                            <button class="btn btn-primary">خرید دوره</button>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-primary">ورود به سایت برای خرید دوره</a>
+                <div style="height: -webkit-fill-available;" class="d-flex f-col justify-content-space-between">
+                    <div class="d-flex f-col">
+                        <div class="d-flex justify-content-space-between"><p>تعداد جلسات</p><p>{{ sizeof($item['sessions']) }}</p></div>
+                        <div class="d-flex justify-content-space-between"><p>مدت دوره</p><p>{{ $item['duration'] }}</p></div>
+                        @if(isset($item['attaches_count']))
+                            <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ $item['attaches_count'] }}</p></div>
+                        @elseif(isset($item['attaches']))
+                            <div class="d-flex justify-content-space-between"><p>تعداد فایل‌های ضمیمه</p><p>{{ sizeof($item['attaches']) }}</p></div>
                         @endif
+                        <div class="d-flex f-row g-10">
+                            {{ implode(' - ', array_map(function($e) {return "#" . $e; }, $item['tags'])) }} 
+                        </div>
                     </div>
-                @endif
+                
+                    @if(!$is_owner)
+                        <div class="d-flex f-row justify-content-end">
+                            @if(Auth::check())
+                                <button class="btn btn-primary">خرید دوره</button>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-primary">ورود به سایت برای خرید دوره</a>
+                            @endif
+                        </div>
+                    @endif
+
+                </div>
             </div>
         </div>
         <h2 class="titr">جلسات دوره</h2>

@@ -63,12 +63,6 @@ class CourseController extends Controller
      */
     public function show(Course $course, Request $request)
     {
-        // dd(PurchasedCourseResource::make($course->with([
-        //             'sessions' => function ($query) {
-        //                 $query->ready();
-        //             },
-        //             'attaches', 'tags', 'seo_tags', 'lessons'
-        //         ])->whereId($course->id)->first())->toArray($request));
         if(
             $request->user() != null &&
             (
@@ -118,12 +112,15 @@ class CourseController extends Controller
         }
 
         $course->title = $request->title;
+        $course->duration = $request->duration;
         $course->description = $request->description;
         $course->price = $request->price;
         $course->rate = $request->rate;
         $course->priority = $request->priority;
         $course->visibility = $request->visibility;
         $course->save();
+
+        return redirect()->route('course.index');
     }
 
     /**

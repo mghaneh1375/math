@@ -7,15 +7,9 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>پنل ادمین</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('asset/img/logo.png') }}">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link rel="icon" type="image/png" sizes="32x32"
-            href="{{ asset('theme-assets/images/logo/favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="96x96"
-            href="{{ asset('theme-assets/images/logo/favicon-96x96.png') }}">
-        <link rel="icon" type="image/png" sizes="16x16"
-            href="{{ asset('theme-assets/images/logo/favicon-16x16.png') }}">
 
         <script src="{{ asset('admin-panel/js/jquery.min.js') }}"></script>
         <!-- Google Fonts
@@ -66,7 +60,7 @@
         <link rel="stylesheet" href="{{ asset('admin-panel/css/responsive.css') }}">
         <link rel="stylesheet" href="{{ asset('admin-panel/css/common.css?v=1.2') }}">
         <link rel="stylesheet" href="{{ asset('admin-panel/css/commonCSS.css') }}">
-        <link rel="stylesheet" href="{{ asset('theme-assets/css/fontface.css') }}">
+        <link rel="stylesheet" href="{{ asset('asset/fonts/font.css') }}" />
 
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!-- modernizr JS
@@ -109,8 +103,6 @@
                 <div class="sidebar-header">
                     <a
                         href="{{ route('admin_dashboard') }}">
-                        <img
-                            src="{{ asset('theme-assets/images/avatar/default.png') }}" alt="">
                     </a>
                     <h3>پنل ادمین</h3>
                 </div>

@@ -23,7 +23,7 @@
 
             <div>
                 <label for="title">عنوان</label>
-                <input value="{{ isset($item) ? $item->title : ''}}" type="text" name="title" id="title" required />
+                <input value="{{ old('title', isset($item) ? $item->title : '') }}" type="text" name="title" id="title" required />
             </div>
             
             <div>
@@ -38,17 +38,17 @@
 
             <div>
                 <label for="price">قیمت</label>
-                <input value="{{ isset($item) ? $item->price : ''}}" type="number" name="price" id="price" required />
+                <input value="{{ old('price', isset($item) ? $item->price : '') }}" type="number" name="price" id="price" required />
             </div>
 
             <div>
                 <label for="duration">مدت دوره به ثانیه</label>
-                <input value="{{ isset($item) ? $item->duration : ''}}" type="number" name="duration" id="duration" required />
+                <input value="{{ old('duration', isset($item) ? $item->duration : '') }}" type="number" name="duration" id="duration" required />
             </div>
 
             <div>
                 <label for="priority">اولویت نمایش</label>
-                <input value="{{ isset($item) ? $item->priority : ''}}" type="number" name="priority" id="priority" required />
+                <input value="{{ old('priority', isset($item) ? $item->priority : '') }}" type="number" name="priority" id="priority" required />
             </div>
 
             <div>
@@ -62,7 +62,9 @@
             <p style="margin-top: 20px">توضیحات</p>
             <div class="editor">
                 <div id="toolbar-container"></div>
-                @if (isset($item) && $item->description != null && $item->description != '')
+                @if(old('description') != null && old('description') != '')
+                    <div id="desc">{!! old('description') !!}</div>
+                @elseif (isset($item) && $item->description != null && $item->description != '')
                     <div id="desc">{!! $item->description !!}</div>
                 @else
                     <div id="desc"></div>

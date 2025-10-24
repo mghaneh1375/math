@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,8 +26,8 @@ class AdminCourseDigestResource extends JsonResource
             'buyers_count' => $this->purchases_count,
             'sessions_count' => $this->sessions_count,
             'attaches_count' => $this->attaches_count,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => Controller::MiladyToShamsi4(strtotime($this->created_at)),
+            'updated_at' => Controller::MiladyToShamsi4(strtotime($this->updated_at)),
         ];
     }
 }

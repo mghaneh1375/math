@@ -43,6 +43,12 @@
                                         onclick="removeModal('item', {{ $item['id'] }}, '{{ route('course.destroy', ['course' => $item['id']]) }}')"
                                         data-toggle='tooltip' title="حذف" class="btn btn-danger"><span
                                             class="glyphicon glyphicon-trash"></span></button>
+                                    <a href="{{ route('course.edit', ['course' => $item['id']]) }}">
+                                        <button
+                                            data-toggle='tooltip' title="ویرایش" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                    </a>
                                     <a href="{{ route('course.session.index', ['course' => $item['id']]) }}" class="btn btn-info">جلسات</a>
                                     <a href="{{ route('course.free_session.index', ['course' => $item['id']]) }}" class="btn btn-primary">جلسات رایگان دوره</a>
                                     <a href="{{ route('course.attach.index', ['course' => $item['id']]) }}" class="btn btn-warning">فایل‌های ضمیمه</a>
@@ -58,7 +64,7 @@
                         <td>{{ $item['attaches_count'] }}</td>
                         <td>{{ $item['rate'] }}</td>
                         <td>{{ $item['priority'] }}</td>
-                        <td>{{ $item['visibility'] }}</td>
+                        <td>{{ $item['visibility'] ? 'نمایش' : 'عدم نمایش' }}</td>
                         <td>{{ $item['created_at'] }}</td>
                         <td>{{ $item['updated_at'] }}</td>
                     </tr>

@@ -90,3 +90,5 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->nam
 Route::get('login', [AuthController::class, 'login'])->name('login');
 
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
+
+Route::view('about-us', 'public.about')->name('about');

@@ -33,7 +33,8 @@ class Course extends Model
         'img',
         'rate',
         'priority',
-        'visibility'
+        'visibility',
+        'duration'
     ];
     
     public function seo_tags(): HasMany

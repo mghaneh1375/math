@@ -41,6 +41,10 @@ body {
     flex-direction: row;
 }
 
+.f-col {
+    flex-direction: column;
+}
+
 .g-10 {
     gap: 10px;
 }
@@ -55,7 +59,7 @@ body {
 }
 
 .content-container {
-    min-height: calc(100vh - 130px - 2rem);
+    min-height: calc(100vh - 140px - 2rem);
     margin-top: 10px;
 }
 
