@@ -1079,6 +1079,7 @@
             "keywords": [
                 "guzzlehttp",
                 "uri-template"
+            "time": "2025-08-06T21:43:34+00:00"
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
@@ -2649,9 +2650,9 @@
                 "issues": "https://github.com/nette/utils/issues",
                 "source": "https://github.com/nette/utils/tree/v4.0.8"
             },
-            "time": "2025-08-06T21:43:34+00:00"
         },
         {
+            },
             "name": "nikic/php-parser",
             "version": "v5.6.2",
             "source": {
@@ -4136,7 +4137,7 @@
                 "exclude-from-classmap": [
                     "/Tests/"
                 ]
-            },
+                "php": ">=8.1"
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -4501,7 +4502,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+            },
             },
             "require-dev": {
                 "symfony/filesystem": "^6.0|^7.0"
@@ -5098,7 +5099,7 @@
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
                 "reference": "9614ac4d8061dc257ecc64cba1b140873dce8ad3"
-            },
+            "description": "This is the PHP port of Hamcrest Matchers",
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/9614ac4d8061dc257ecc64cba1b140873dce8ad3",
@@ -6791,10 +6792,10 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": "This is the PHP port of Hamcrest Matchers",
+            ],
             "keywords": [
                 "test"
-            ],
+                }
             "support": {
                 "issues": "https://github.com/hamcrest/hamcrest-php/issues",
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.1.1"
@@ -7221,8 +7222,8 @@
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de",
                     "role": "Developer"
-                }
             ],
+                {
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
             "support": {
                 "issues": "https://github.com/phar-io/manifest/issues",
@@ -7269,11 +7270,11 @@
                     "email": "arne@blankerts.de",
                     "role": "Developer"
                 },
-                {
+                },
                     "name": "Sebastian Heuer",
                     "email": "sebastian@phpeople.de",
                     "role": "Developer"
-                },
+            ],
                 {
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de",
@@ -7605,7 +7606,7 @@
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
                 }
-            ],
+                "classmap": [
             "time": "2023-02-03T06:57:52+00:00"
         },
         {
@@ -7666,7 +7667,6 @@
                 "files": [
                     "src/Framework/Assert/Functions.php"
                 ],
-                "classmap": [
                     "src/"
                 ]
             },
@@ -9189,3 +9189,4 @@
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
+
