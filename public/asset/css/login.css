@@ -35,7 +35,7 @@ input[type="password"]:focus {
     border-color: #4a90e2;
     outline: none;
 }
-button {
+.buttons > * {
     width: 100%;
     padding: 8px;
     border: none;
@@ -45,10 +45,10 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.buttons button:nth-child(1) {
+.buttons *:nth-child(1) {
     background-color: #4a90e2;
 }
-.buttons button:nth-child(2) {
+.buttons *:nth-child(2) {
     background-color: #e24a84;
 }
 button:hover {

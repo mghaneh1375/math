@@ -1,4 +1,4 @@
-<footer dir="rtl" class="bg-dark text-light text-center py-4" style="border-top: 1px solid #dee2e6; padding-top: 1rem !important; padding-bottom: 1rem !important;">
+<footer dir="rtl" class="footer bg-dark text-light text-center py-4">
   <div class="mb-3">
     <!-- Instagram -->
     <a href="https://instagram.com/yourprofile" target="_blank" class="text-light mx-3" aria-label="Instagram">

@@ -59,7 +59,7 @@ body {
 }
 
 .content-container {
-    min-height: calc(100vh - 140px - 2rem);
+    min-height: calc(100vh - 160px - 2rem);
     margin-top: 10px;
 }
 

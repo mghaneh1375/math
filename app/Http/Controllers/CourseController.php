@@ -73,7 +73,7 @@ class CourseController extends Controller
             return view('public.course.show', [
                 'item' => PurchasedCourseResource::make($course->with([
                     'sessions' => function ($query) {
-                        $query->ready();
+                        $query->ready()->with(['attaches']);
                     },
                     'attaches', 'tags', 'seo_tags', 'lessons'
                 ])->whereId($course->id)->first())->toArray($request),
@@ -84,7 +84,7 @@ class CourseController extends Controller
         return view('public.course.show', [
                 'item' => PublicDetailedCourseResource::make($course->with([
                     'sessions' => function ($query) {
-                        $query->ready();
+                        $query->ready()->withCount(['attaches']);
                     }, 'tags', 'seo_tags', 'lessons'
                 ])->withCount(['attaches'])->whereId($course->id)->first())->toArray($request),
                 'seo_tags' => PublicSeoTag::all(),

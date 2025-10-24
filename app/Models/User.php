@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @property integer $id
  * @property string $title
+ * @property string $status
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereUsername($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereGradeId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereLevel($value)

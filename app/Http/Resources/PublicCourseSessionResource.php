@@ -18,6 +18,7 @@ class PublicCourseSessionResource extends JsonResource
             'title' => $this->title,
             'chapter' => $this->chapter,
             'duration' => sprintf('%02d:%02d', floor($this->duration / 60) % 60, $this->duration % 60) . ' دقیقه ',
+            'attaches_count' => $this->attaches_count == null ? 0 : $this->attaches_count,
         ];
     }
 }

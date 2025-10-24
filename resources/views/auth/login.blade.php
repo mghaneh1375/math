@@ -37,7 +37,7 @@
             </center>
             <div class="buttons">
                 <button type="submit">ورود</button>
-                <button type="button" onclick="alert('صفحه ثبت نام به زودی اضافه می‌شود!')">ثبت نام</button>
+                <a href="{{ route('register') }}">ثبت نام</a>
             </div>
         </form>
         <div class="forgot-password">

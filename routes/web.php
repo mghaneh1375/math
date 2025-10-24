@@ -89,6 +89,14 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->nam
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 
+Route::get('register', [AuthController::class, 'register'])->name('register');
+
+Route::post('register', [AuthController::class, 'registry'])->name('registry');
+
+Route::get('active-profile/{activation}', [AuthController::class, 'activate'])->name('activate_account');
+
+Route::post('active-profile/{activation}', [AuthController::class, 'doActivate'])->name('do_activate_account');
+
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
 
 Route::view('about-us', 'public.about')->name('about');

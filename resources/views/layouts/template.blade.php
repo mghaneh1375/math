@@ -8,10 +8,12 @@
         @yield('meta_tags')
         @section('header')
             <link rel="stylesheet" href="{{ asset('admin-panel/css/bootstrap.min.css') }}">
+            <script src="{{ asset('admin-panel/js/vendor/jquery-1.11.3.min.js') }}"></script>
             <script src="{{ asset('admin-panel/js/bootstrap.min.js') }}"></script>
             <link rel="stylesheet" href="{{ asset('asset/fonts/font.css') }}" />
             <link rel="stylesheet" href="{{ asset('asset/css/common.css') }}" />
             <link rel="stylesheet" href="{{ asset('asset/css/nav.css') }}" />
+            <link rel="stylesheet" href="{{ asset('asset/css/footer.css') }}" />
         @show
     </head>
     <body>

@@ -56,20 +56,65 @@
             </div>
         </div>
         <h2 class="titr">جلسات دوره</h2>
-        <?php $chapters = []; ?>
-        @foreach($item['sessions'] as $session)
-            @if(!in_array($session['chapter'], $chapters))
-                <p class="chapter">{{ $session['chapter'] }}</p>
-                <div class="ahidden session">
-                    <p>{{ $session['title'] }}</p>
-                </div>
-                <?php array_push($chapters, $session['chapter']) ?>
-            @else
-                <div class="ahidden session">
-                    <p>{{ $session['title'] }}</p>
-                    <p>{{ $session['duration'] }}</p>
-                </div>
-            @endif
-        @endforeach
+        <div class="chapters">
+            <?php $chapters = []; $i = 0; ?>
+            @foreach($item['sessions'] as $session)
+                @if(!in_array($session['chapter'], $chapters))
+                    @if($i > 0)
+                        </div>
+                    @endif
+                    <div class="chapter" onclick="toggleHiddenClass('{{$i}}')">
+                        <p>{{ $session['chapter'] }}</p>
+                        <div class="d-flex f-row g-10 align-items-center">
+                            <p>{{ "تعداد جلسات این فصل: " . count(array_filter($item['sessions'], fn($x) => $x['chapter'] === $session['chapter'])) }}</p>
+                            <span id="icon_{{$i}}" class="icons glyphicon glyphicon-chevron-down"></span>
+                        </div>
+                    </div>
+                    <div class="sessions hidden" id="session_{{$i}}">
+                        <div class="session">
+                            <p>{{ $session['title'] }}</p>
+                            <div class="d-flex f-row g-10">
+                                <p>{{ $session['duration'] }}</p>
+                                @if($session['attaches_count'] > 0)
+                                    <p>{{ "تعداد فایل‌های ضمیمه این جلسه" . $session['attaches_count'] }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <?php array_push($chapters, $session['chapter']) ?>
+                @else
+                    <div class="session">
+                        <p>{{ $session['title'] }}</p>
+                        <div class="d-flex f-row g-10">
+                            <p>{{ $session['duration'] }}</p>
+                            @if(
+                                (isset($session['attaches_count']) && $session['attaches_count'] > 0) ||
+                                (isset($session['attaches']) && count($session['attaches']) > 0)
+                            )
+                                <span> - </span>
+                                <p>{{ "تعداد فایل‌های ضمیمه این جلسه: " . (isset($session['attaches']) ? count($session['attaches']) : $session['attaches_count']) }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+                <?php $i++; ?>
+                @if(sizeOf($item['sessions']) == $i)
+                    </div>
+                @endif
+            @endforeach
+        </div>
     </div>
+    <script>
+        function toggleHiddenClass(i) {
+            if($(`#session_${i}`).hasClass('hidden')) {
+                $(".sessions").addClass('hidden');
+                $(`#session_${i}`).removeClass('hidden');
+                $('.icons').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                $(`#icon_${i}`).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            }
+            else {
+                $(`#session_${i}`).addClass('hidden');
+                $(`#icon_${i}`).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            }
+        }
+    </script>
 @stop
