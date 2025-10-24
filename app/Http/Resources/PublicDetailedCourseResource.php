@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,7 @@ class PublicDetailedCourseResource extends JsonResource
             'img' => Storage::url($this->img),
             'price' => number_format($this->price, 0) . ' تومان',
             'rate' => $this->rate,
-            'duration' => $this->duration,
+            'duration' => Controller::formatSecondsToHMS($this->duration),
             'sessions' => PublicCourseSessionResource::collection($this->sessions)->toArray($request),
             'lessons' =>  $this->lessons == null ? [] : PublicLessonResource::collection($this->lessons)->toArray($request),
             'tags' => $this->tags == null ? [] : $this->tags->map(function($tag) { return $tag->value; })->toArray(),

@@ -105,8 +105,8 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        if($request->has('img')) {
-            $path = $request->file('img')->store(self::$FOLDER);
+        if($request->has('img_file')) {
+            $path = $request->file('img_file')->store(self::$FOLDER);
             Storage::delete($course->img);
             $course->img = $path;
         }
