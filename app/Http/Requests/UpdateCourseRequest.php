@@ -24,7 +24,7 @@ class UpdateCourseRequest extends FormRequest
         return [
             'title' => 'bail|required|string|min:2|max:255',
             'description' => 'bail|required|string|min:2',
-            'img_file' => 'bail|image|size:5120|mimes:jpg,jpeg,png',
+            'img_file' => 'bail|image|max:5120|mimes:jpg,jpeg,png',
             'priority' => 'bail|integer|min:1|max:100',
             'price' => 'bail|integer|min:0|max:100000000',
             'duration' => 'bail|integer|min:0|max:100000000',
