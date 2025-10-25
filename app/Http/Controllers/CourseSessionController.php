@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VideoUploaded;
 use App\Models\CourseSession;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCourseSessionRequest;
@@ -91,6 +92,7 @@ class CourseSessionController extends Controller
             }
             rmdir($tempDir);
 
+            event(new VideoUploaded($session->id, $fileName));
             $session->file = $fileName;
             $session->should_chunk = true;
             $session->chunk_at = null;
