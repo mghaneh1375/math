@@ -51,7 +51,14 @@ class CourseSessionController extends Controller
     }
 
     public function fileUploader(CourseSession $session) {
-        return view('admin.course.session.fileUploader', ['course' => $session->course->title, 'session' => $session]);
+        return view('admin.course.session.fileUploader', ['course' => $session->course, 'session' => $session]);
+    }
+
+    private static function sanitizeFileName($fileName) {
+        $fileName = trim($fileName);
+        $fileName = str_replace(' ', '_', $fileName);
+        $fileName = preg_replace('/[^A-Za-z0-9_\-\.]/', '', $fileName);
+        return $fileName;
     }
 
     public function doFileUploader(CourseSession $session, FileUploadRequest $request) {
@@ -63,6 +70,7 @@ class CourseSessionController extends Controller
 
         // مسیر موقت برای ذخیره چانک‌ها
         $tempDir = storage_path(self::$TEMP_FOLDER . $fileName);
+        $tempDir = self::sanitizeFileName($tempDir);
         if (!file_exists($tempDir)) {
             mkdir($tempDir, 0777, true);
         }
@@ -75,7 +83,7 @@ class CourseSessionController extends Controller
         $uploadedChunks = array_diff($uploadedChunks, ['.', '..']);
 
         if (count($uploadedChunks) == $totalChunks) {
-            $finalPath = storage_path(self::$TEMP_FOLDER . $fileName);
+            $finalPath = storage_path(self::$FOLDER . $fileName);
             $out = fopen($finalPath, 'wb');
 
             for ($i = 0; $i < $totalChunks; $i++) {

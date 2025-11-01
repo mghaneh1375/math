@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'admin/public_seo_tags/**'
+        'admin/session/*/file'
     ];
 }

@@ -196,7 +196,7 @@
         @section('reminder')
             <!-- jquery
                                                                                                                     ============================================ -->
-            {{-- <script src="{{ asset('admin-panel/js/vendor/jquery-1.11.3.min.js') }}"></script> --}}
+            <script src="{{ asset('admin-panel/js/vendor/jquery-1.11.3.min.js') }}"></script>
             <!-- bootstrap JS
                                                                                                                             ============================================ -->
             <script src="{{ asset('admin-panel/js/bootstrap.min.js') }}"></script>
