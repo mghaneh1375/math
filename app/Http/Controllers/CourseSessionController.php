@@ -69,7 +69,7 @@ class CourseSessionController extends Controller
         $fileName = $request->fileName;
 
         // مسیر موقت برای ذخیره چانک‌ها
-        $tempDir = storage_path(self::$TEMP_FOLDER . $fileName);
+        $tempDir = storage_path(storage_path(self::$TEMP_FOLDER . $fileName));
         $tempDir = self::sanitizeFileName($tempDir);
         if (!file_exists($tempDir)) {
             mkdir($tempDir, 0777, true);
