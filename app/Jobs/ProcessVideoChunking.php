@@ -71,11 +71,8 @@ class ProcessVideoChunking implements ShouldQueue
             $masterPlaylistPath = "{$outputDirectory}/master.m3u8";
             $export->save($masterPlaylistPath);
 
-	        $media = FFMpeg::fromDisk($storageDisk)->open('session_raw_videos/' . $this->videoPath);
-            $duration = $media->getDurationInSeconds();
-
             // Update video record with playlist info
-            $this->updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions, $duration);
+            $this->updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions);
 
 	        TransferToFTP::dispatch($this->sessionId, $outputDirectory)
                 ->onQueue('ftp-transfer')
@@ -115,14 +112,13 @@ private function createVideoFormat($resolutionConfig)
         return $format;
     }
     
-    private function updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions, $duration)
+    private function updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions)
     {
         CourseSession::whereId($this->sessionId)->update([
             'master_playlist_path' => $masterPlaylistPath,
             'available_resolutions' => $availableResolutions,
             'processing_status' => 'completed',
-            'chunked_at' => Carbon::now(),
-            'duration' => $duration
+            'chunked_at' => Carbon::now()
         ]);
     }
 
