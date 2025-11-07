@@ -77,7 +77,7 @@ class ProcessVideoChunking implements ShouldQueue
             // Update video record with playlist info
             $this->updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions, $duration);
 
-	        TransferToFTP::dispatch($this->sessionId, $outputPath)
+	        TransferToFTP::dispatch($this->sessionId, $outputDirectory)
                 ->onQueue('ftp-transfer')
                 ->delay(now()->addSeconds(10)); // 10 ثانیه تاخیر برای اطمینان
             

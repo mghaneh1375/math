@@ -25,8 +25,9 @@
                 return;
             }
 
+            $("#uploadBtn").addClass('hidden');
             const file = fileInput.files[0];
-            const chunkSize = 500 * 1024; // 200KB برای هر چانک
+            const chunkSize = 500 * 1024; // 500KB برای هر چانک
             const totalChunks = Math.ceil(file.size / chunkSize);
             const fileName = file.name;
 
@@ -51,6 +52,7 @@
                     });
 
                     const result = await response.json();
+                    alert("آپلود فایل با موفقیت انجام شد");
                     console.log(result.message);
                 } catch (error) {
                     console.error(`خطا در آپلود چانک ${chunkIndex}:`, error);

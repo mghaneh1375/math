@@ -1,8 +1,8 @@
 <?php
-// app/Jobs/TransferToFTP.php
 
 namespace App\Jobs;
 
+use App\Models\CourseSession;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,27 +15,26 @@ class TransferToFTP implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $videoId;
+    public $sessionId;
     public $localPath;
 
-    public function __construct($videoId, $localPath)
+    public function __construct($sessionId, $localPath)
     {
-        $this->videoId = $videoId;
+        $this->sessionId = $sessionId;
         $this->localPath = $localPath;
     }
 
     public function handle()
     {
         try {
-            Log::info("Starting FTP transfer for video ID: {$this->videoId}");
+            Log::info("Starting FTP transfer for session ID: {$this->sessionId}");
 
-            $localDisk = config('video.storage_disk', 'public');
-            $localDirectory = "hls_videos/{$this->videoId}";
-            $remoteDirectory = "videos/{$this->videoId}";
+            $localDisk = config('video.storage_disk', 'local');
+            $remoteDirectory = "videos/{$this->sessionId}";
 
             // Check if local directory exists
-            if (!Storage::disk($localDisk)->exists($localDirectory)) {
-                throw new \Exception("Local directory not found: {$localDirectory}");
+            if (!Storage::disk($localDisk)->exists($this->localPath)) {
+                throw new \Exception("Local directory not found: {$this->localPath}");
             }
 
             // Create remote directory if not exists
@@ -44,59 +43,44 @@ class TransferToFTP implements ShouldQueue
             }
 
             // Get all files in the HLS directory
-            $files = Storage::disk($localDisk)->allFiles($localDirectory);
-
+            $files = Storage::disk($localDisk)->allFiles($this->localPath);
             $transferredFiles = [];
 
             foreach ($files as $file) {
-                $remotePath = $file; // یا اگر مسیر متفاوتی می‌خواید: str_replace($localDirectory, $remoteDirectory, $file)
-                
+                $remotePath = $file;
                 // Read file content
                 $content = Storage::disk($localDisk)->get($file);
-                
                 // Upload to FTP
                 Storage::disk('ftp')->put($remotePath, $content);
-                
                 $transferredFiles[] = $file;
-                
                 Log::info("Transferred: {$file}");
             }
 
             // Update database with FTP paths
-            $this->updateVideoWithFTPInfo($remoteDirectory, $files);
-
-            // Optional: Delete local files after transfer
-            // Storage::disk($localDisk)->deleteDirectory($localDirectory);
-
-            Log::info("FTP transfer completed for video ID: {$this->videoId}. Files transferred: " . count($files));
-
+            $this->updateVideoWithFTPInfo();
+            Storage::disk($localDisk)->deleteDirectory($this->localPath);
+            Log::info("FTP transfer completed for session ID: {$this->sessionId}. Files transferred: " . count($files));
         } catch (\Exception $e) {
-            Log::error("FTP transfer failed for video ID: {$this->videoId}. Error: " . $e->getMessage());
+            Log::error("FTP transfer failed for session ID: {$this->sessionId}. Error: " . $e->getMessage());
             $this->failed($e);
         }
     }
 
-    private function updateVideoWithFTPInfo($remoteDirectory, $files)
+    private function updateVideoWithFTPInfo()
     {
-        // اگر مدل Video دارید
-        \App\Models\Video::where('id', $this->videoId)->update([
-            'ftp_path' => $remoteDirectory,
-            'files_transferred' => count($files),
+        CourseSession::whereId($this->sessionId)->update([
+            'transfer_status' => 'completed',
             'transferred_at' => now(),
         ]);
-
-        // یا اگر با session کار می‌کنید
-        // \App\Models\CourseSession::where('id', $this->videoId)->update([...]);
     }
 
     public function failed(\Throwable $exception)
     {
-        Log::error("FTP transfer job failed for video ID: {$this->videoId}. Error: " . $exception->getMessage());
-
+        Log::error("FTP transfer job failed for video ID: {$this->sessionId}. Error: " . $exception->getMessage());
         // Update status to failed
-        \App\Models\Video::where('id', $this->videoId)->update([
+        CourseSession::whereId($this->sessionId)->update([
             'transfer_status' => 'failed',
-            'error_message' => $exception->getMessage()
+            'transfer_error_message' => $exception->getMessage()
         ]);
     }
 }
