@@ -17,11 +17,8 @@
 
     <script>
         $("#uploadBtn").on('click', async () => {
-            alert("start");
-            console.log("here");
             
             const fileInput = document.getElementById('fileInput');
-            console.log(fileInput.files.length);
             
             if (!fileInput.files.length) {
                 alert('لطفا یک فایل انتخاب کنید');
@@ -29,7 +26,7 @@
             }
 
             const file = fileInput.files[0];
-            const chunkSize = 2 * 1024 * 1024; // 2MB برای هر چانک
+            const chunkSize = 500 * 1024; // 200KB برای هر چانک
             const totalChunks = Math.ceil(file.size / chunkSize);
             const fileName = file.name;
 
