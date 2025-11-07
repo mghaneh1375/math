@@ -14,6 +14,7 @@
     <div>
         <progress id="progressBar" value="0" max="100"></progress>
     </div>
+    <div class="hidden" id="uploading">در حال بارگذاری ویدیو، لطفا شکیبا باشید</div>
 
     <script>
         $("#uploadBtn").on('click', async () => {
@@ -26,6 +27,8 @@
             }
 
             $("#uploadBtn").addClass('hidden');
+            $("#uploading").removeClass('hidden');
+
             const file = fileInput.files[0];
             const chunkSize = 500 * 1024; // 500KB برای هر چانک
             const totalChunks = Math.ceil(file.size / chunkSize);
@@ -52,13 +55,15 @@
                     });
 
                     const result = await response.json();
-                    alert("آپلود فایل با موفقیت انجام شد");
                     console.log(result.message);
                 } catch (error) {
                     console.error(`خطا در آپلود چانک ${chunkIndex}:`, error);
                     return;
                 }
             }
+            
+            alert("آپلود فایل با موفقیت انجام شد");
+            $("#uploading").remove();
         });
     </script>
 @stop
