@@ -35,11 +35,11 @@ return [
         	'host' => env('FTP_HOST'),
         	'username' => env('FTP_USERNAME'),
         	'password' => env('FTP_PASSWORD'),
-        	'port' => env('FTP_PORT', 21),
+        	'port' => intval(env('FTP_PORT', 21)),
         	'root' => env('FTP_ROOT', ''),
         	'passive' => env('FTP_PASSIVE', true),
         	'ssl' => env('FTP_SSL', false),
-        	'timeout' => env('FTP_TIMEOUT', 30),
+        	'timeout' => intval(env('FTP_TIMEOUT', 30)),
     	],
 
 

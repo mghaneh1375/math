@@ -16,6 +16,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/telescope": "*",
         "laravel/tinker": "^2.8",
+        "league/flysystem-ftp": "^3.29",
         "pbmedia/laravel-ffmpeg": "^8.7"
     },
     "require-dev": {
