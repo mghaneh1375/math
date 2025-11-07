@@ -45,12 +45,12 @@ class ProcessVideoChunking implements ShouldQueue
             // Create output directory if it doesn't exist
             Storage::disk($storageDisk)->makeDirectory($outputDirectory);
 
-            $media = FFMpeg::fromDisk($storageDisk)->open($this->videoPath);
+            $media = FFMpeg::fromDisk($storageDisk)->open(storage_path('app/public/session_raw_videos/' . $this->videoPath));
             $duration = $media->getDurationInSeconds();
 
             // Create HLS export with multiple bitrates
             $export = FFMpeg::fromDisk($storageDisk)
-                ->open($this->videoPath)
+                ->open(storage_path('app/public/session_raw_videos/' . $this->videoPath))
                 ->exportForHLS()
                 ->toDisk($storageDisk)
                 ->setSegmentLength($this->chunkDuration)
@@ -62,13 +62,13 @@ class ProcessVideoChunking implements ShouldQueue
             foreach ($resolutions as $resolutionName => $resolutionConfig) {
                 list($width, $height) = explode('x', $resolutionConfig['resolution']);
                 
-                $export->addFormat((new X264($resolutionConfig['audio_bitrate'], $resolutionConfig['video_bitrate']))
-                    ->setKiloBitrate(intval(str_replace('k', '', $resolutionConfig['video_bitrate'])))
-                    ->setAdditionalParameters(['-vf', "scale={$width}:{$height}"]), 
-                    function (HLSVideoFilters $filters) {
-                        $filters->resize(1920, 1080); // This will be overridden by the scale parameter
-                    }
-                );
+                // Create format with proper parameters
+                $format = new X264('aac', $resolutionConfig['video_bitrate']); // 'aac' is the audio codec
+                $format->setAudioKiloBitrate(intval(str_replace('k', '', $resolutionConfig['audio_bitrate'])));
+                
+                $export->addFormat($format, function (HLSVideoFilters $filters) use ($width, $height) {
+                    $filters->resize($width, $height);
+                });
 
                 $availableResolutions[] = $resolutionName;
             }

@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class CourseSessionController extends Controller
 {
-    private static $FOLDER = "public/session_raw_videos";
-    private static $TEMP_FOLDER = "public/uploads_temp";
+    private static $FOLDER = "app/public/session_raw_videos/";
+    private static $TEMP_FOLDER = "app/public/uploads_temp_";
     /**
      * Display a listing of the resource.
      */
@@ -66,11 +66,11 @@ class CourseSessionController extends Controller
         $chunk = $request->file('file');
         $chunkIndex = $request->chunkIndex;
         $totalChunks = $request->totalChunks;
-        $fileName = $request->fileName;
-
+        $fileName = self::sanitizeFileName($request->fileName);
+        $a = pathinfo($fileName, PATHINFO_FILENAME);
         // مسیر موقت برای ذخیره چانک‌ها
-        $tempDir = storage_path(storage_path(self::$TEMP_FOLDER . $fileName));
-        $tempDir = self::sanitizeFileName($tempDir);
+        $tempDir = storage_path(self::$TEMP_FOLDER . $a);
+
         if (!file_exists($tempDir)) {
             mkdir($tempDir, 0777, true);
         }
@@ -100,11 +100,11 @@ class CourseSessionController extends Controller
             }
             rmdir($tempDir);
 
-            event(new VideoUploaded($session->id, $fileName));
             $session->file = $fileName;
             $session->should_chunk = true;
-            $session->chunk_at = null;
+            $session->chunked_at = null;
             $session->save();
+            event(new VideoUploaded($session->id, $fileName));
 
             return response()->json(['message' => 'File uploaded successfully', 'file' => $fileName]);
         }
