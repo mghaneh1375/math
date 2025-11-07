@@ -44,18 +44,13 @@ class ProcessVideoChunking implements ShouldQueue
             
             // Create output directory if it doesn't exist
             Storage::disk($storageDisk)->makeDirectory($outputDirectory);
-
-            $media = FFMpeg::fromDisk($storageDisk)->open(storage_path('app/public/session_raw_videos/' . $this->videoPath));
-            $duration = $media->getDurationInSeconds();
-
+	        $media = FFMpeg::fromDisk($storageDisk)->open('session_raw_videos/' . $this->videoPath);
             // Create HLS export with multiple bitrates
-            $export = FFMpeg::fromDisk($storageDisk)
-                ->open(storage_path('app/public/session_raw_videos/' . $this->videoPath))
+            $export = $media
                 ->exportForHLS()
                 ->toDisk($storageDisk)
                 ->setSegmentLength($this->chunkDuration)
                 ->setKeyFrameInterval(48);
-
             $resolutions = config('video.resolutions', []);
             $availableResolutions = [];
 
@@ -63,8 +58,7 @@ class ProcessVideoChunking implements ShouldQueue
                 list($width, $height) = explode('x', $resolutionConfig['resolution']);
                 
                 // Create format with proper parameters
-                $format = new X264('aac', $resolutionConfig['video_bitrate']); // 'aac' is the audio codec
-                $format->setAudioKiloBitrate(intval(str_replace('k', '', $resolutionConfig['audio_bitrate'])));
+                $format = $this->createVideoFormat($resolutionConfig);
                 
                 $export->addFormat($format, function (HLSVideoFilters $filters) use ($width, $height) {
                     $filters->resize($width, $height);
@@ -77,8 +71,15 @@ class ProcessVideoChunking implements ShouldQueue
             $masterPlaylistPath = "{$outputDirectory}/master.m3u8";
             $export->save($masterPlaylistPath);
 
+	        $media = FFMpeg::fromDisk($storageDisk)->open('session_raw_videos/' . $this->videoPath);
+            $duration = $media->getDurationInSeconds();
+
             // Update video record with playlist info
             $this->updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions, $duration);
+
+	        TransferToFTP::dispatch($this->sessionId, $outputPath)
+                ->onQueue('ftp-transfer')
+                ->delay(now()->addSeconds(10)); // 10 ثانیه تاخیر برای اطمینان
             
             Log::info("HLS video processing completed for video ID: {$this->sessionId}");
             
@@ -87,6 +88,31 @@ class ProcessVideoChunking implements ShouldQueue
             $this->markVideoAsFailed();
             throw $e;
         }
+    }
+
+private function createVideoFormat($resolutionConfig)
+    {
+        // Create X264 format with proper codec names
+        $format = new X264('aac', 'libx264'); // Audio codec, Video codec
+        
+        // Set the video bitrate (convert '400k' to 400)
+        $videoBitrate = intval(str_replace('k', '', $resolutionConfig['video_bitrate']));
+        $format->setKiloBitrate($videoBitrate);
+        
+        // Set audio bitrate
+        $audioBitrate = intval(str_replace('k', '', $resolutionConfig['audio_bitrate']));
+        $format->setAudioKiloBitrate($audioBitrate);
+        
+        // Additional quality settings for better output
+        $format->setAdditionalParameters([
+            '-preset', 'fast',
+            '-crf', '23',
+            '-movflags', '+faststart',
+            '-profile:v', 'main',
+            '-level', '3.1',
+        ]);
+        
+        return $format;
     }
     
     private function updateVideoWithPlaylistInfo($masterPlaylistPath, $availableResolutions, $duration)
