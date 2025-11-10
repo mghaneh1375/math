@@ -38,7 +38,10 @@ class CourseSession extends Model
         'course_id',
         'available_resolutions',
         'processing_status',
-        'master_playlist_path'
+        'available_resolutions',
+        'master_playlist_path',
+        'transfer_status',
+        'transferred_at'
     ];
 
     protected $casts = [

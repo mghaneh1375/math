@@ -27,7 +27,7 @@ class AdminCourseSessionDigestResource extends JsonResource
             'updated_at' => $this->updated_at,
             'visibility' => $this->visibility,
             'is_file_uploaded' => $this->file != null,
-            'preview_link' => ($this->file != null && str_starts_with($this->file, 'http') ? $this->file : $this->chunked_at != null) ? env('VIDEO_SERVER_ADDR') . $this->file : Storage::url($this->file),
+            'preview_link' => ($this->file != null && str_starts_with($this->file, 'http') ? $this->file : $this->processing_status == 'completed' && $this->transfer_status == 'completed') ? env('VIDEO_SERVER_ADDR') . $this->master_playlist_path : Storage::url($this->file),
             'need_chunking' => $this->file != null && str_starts_with($this->file, 'http') ? 'خیر' : 'بله',
             'transferred_at' => $this->transferred_at == null ? '' : Controller::MiladyToShamsi3(strtotime($this->transferred_at)),
             'transfer_status' => $this->transfer_status,
