@@ -28,18 +28,11 @@ class TransferToFTP implements ShouldQueue
     {
         try {
             Log::info("Starting FTP transfer for session ID: {$this->sessionId}");
-
             $localDisk = config('video.storage_disk', 'local');
-            $remoteDirectory = "videos/{$this->sessionId}";
 
             // Check if local directory exists
             if (!Storage::disk($localDisk)->exists($this->localPath)) {
                 throw new \Exception("Local directory not found: {$this->localPath}");
-            }
-
-            // Create remote directory if not exists
-            if (!Storage::disk('ftp')->exists($remoteDirectory)) {
-                Storage::disk('ftp')->makeDirectory($remoteDirectory);
             }
 
             // Get all files in the HLS directory

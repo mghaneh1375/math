@@ -12,7 +12,7 @@ return [
         'timeout' => env('FFMPEG_TIMEOUT', 3600),
         'threads' => env('FFMPEG_THREADS', 12),
     ],
-  'resolutions' => [
+    'resolutions' => [
         '480p' => [
             'resolution' => env('VIDEO_RESOLUTION_480P', '854x480'),
             'video_bitrate' => env('VIDEO_BITRATE_480P', 800),

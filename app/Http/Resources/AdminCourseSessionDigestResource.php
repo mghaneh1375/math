@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,12 @@ class AdminCourseSessionDigestResource extends JsonResource
             'updated_at' => $this->updated_at,
             'visibility' => $this->visibility,
             'is_file_uploaded' => $this->file != null,
-            'preview_link' => ($this->file != null && str_starts_with($this->file, 'http') ? $this->file : $this->chunked_at != null) ? env('VIDEO_SERVER_ADDR') . $this->file : Storage::url($this->file)
+            'preview_link' => ($this->file != null && str_starts_with($this->file, 'http') ? $this->file : $this->chunked_at != null) ? env('VIDEO_SERVER_ADDR') . $this->file : Storage::url($this->file),
+            'need_chunking' => $this->file != null && str_starts_with($this->file, 'http') ? 'خیر' : 'بله',
+            'transferred_at' => $this->transferred_at == null ? '' : Controller::MiladyToShamsi3(strtotime($this->transferred_at)),
+            'transfer_status' => $this->transfer_status,
+            'processing_status' => $this->processing_status,
+            'chunked_at' => $this->chunked_at == null ? '' : Controller::MiladyToShamsi3(strtotime($this->chunked_at)),
         ];
     }
 }
