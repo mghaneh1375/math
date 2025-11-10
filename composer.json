@@ -17,7 +17,8 @@
         "laravel/telescope": "*",
         "laravel/tinker": "^2.8",
         "league/flysystem-ftp": "^3.29",
-        "pbmedia/laravel-ffmpeg": "^8.7"
+        "pbmedia/laravel-ffmpeg": "^8.7",
+        "pishran/zarinpal": "^4.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
