@@ -12,6 +12,7 @@ use App\Http\Controllers\CourseTagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PublicSeoTagController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SessionSeoTagController;
 use Illuminate\Support\Facades\Route;
 
@@ -75,11 +76,15 @@ Route::group(['prefix' => 'course', 'middleware' => ['auth']], function() {
 
     Route::get('list', [CourseController::class, 'myCourses'])->name('my_courses');
 
+    Route::post('buy/{course}', [PurchaseController::class, 'buy'])->name('course.buy');
+
 });
 
 Route::group(['prefix' => 'public'], function() {
 
     Route::get('list', [CourseController::class, 'index'])->name('public_course_list');
+
+    Route::get('completePayment', [PurchaseController::class, 'completePayment'])->name('completePayment');
 
     Route::get('show/{course}', [CourseController::class, 'show'])->name('course.show');
 

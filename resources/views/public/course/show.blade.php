@@ -45,7 +45,9 @@
                     @if(!$is_owner)
                         <div class="d-flex f-row justify-content-end">
                             @if(Auth::check())
-                                <button class="btn btn-primary">خرید دوره</button>
+                                <form method="post" accept="{{ route('course.buy', ['course' => $item['id']]) }}">
+                                    <button type="submit" class="btn btn-primary">خرید دوره</button>
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-primary">ورود به سایت برای خرید دوره</a>
                             @endif
