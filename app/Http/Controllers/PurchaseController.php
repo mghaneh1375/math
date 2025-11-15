@@ -16,7 +16,6 @@ class PurchaseController extends Controller
     
     public function buy(Course $course, Request $request) {
         $user = $request->user();
-
         $response = zarinpal()
             ->amount($course->price)
             ->request()
@@ -32,7 +31,7 @@ class PurchaseController extends Controller
 
         $transaction = new Transaction();
         $transaction->user_id = $user->id;
-        $transaction->amount = $user->id;
+        $transaction->amount = $course->price;
         $transaction->course_id = $course->id;
         $transaction->tracking_code = $response->authority();
         $transaction->status = TransactionStatus::INIT->name;
@@ -62,7 +61,6 @@ class PurchaseController extends Controller
                 'ref_id' => null
             ]);
         }
-
         $response = zarinpal()
             ->amount($transaction->amount)
             ->verification()
@@ -92,7 +90,7 @@ class PurchaseController extends Controller
         return view('public.result', [
             'status' => 'success',
             'message' => 'پرداخت با موفقیت انجام شد.',
-            'ref_id' => $response['RefID']
+            'ref_id' => $response->referenceId()
         ]);
     }
 }
