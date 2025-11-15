@@ -18,7 +18,7 @@ class PurchasedCourseResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'img' => $this->img,
+            'img' => Storage::url($this->img),
             'rate' => $this->rate,
             'duration' => $this->duration,
             'sessions' => $this->sessions == null ? [] : PurchasedCourseSessionResource::collection($this->sessions)->toArray($request),
