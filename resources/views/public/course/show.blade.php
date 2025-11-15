@@ -74,12 +74,12 @@
                         </div>
                     </div>
                     <div class="sessions hidden" id="session_{{$i}}">
-                        <div class="session">
+                        <div onclick="window.location.href = '{{route('session.show', ['session' => $session['id']])}}'" class="session">
                             <p>{{ $session['title'] }}</p>
                             <div class="d-flex f-row g-10">
                                 <p>{{ $session['duration'] }}</p>
-                                @if($session['attaches_count'] > 0)
-                                    <p>{{ "تعداد فایل‌های ضمیمه این جلسه" . $session['attaches_count'] }}</p>
+                                @if(isset($session['attaches']) && count($session['attaches']) > 0)
+                                    <p>{{ "تعداد فایل‌های ضمیمه این جلسه" . count($session['attaches_count']) }}</p>
                                 @endif
                             </div>
                         </div>

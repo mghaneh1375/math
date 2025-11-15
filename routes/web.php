@@ -52,7 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
 
     Route::resource('session.session_seo_tag', SessionSeoTagController::class)->shallow()->except(['show', 'update', 'edit']);
 
-    Route::resource('course.session', CourseSessionController::class)->shallow();
+    Route::resource('course.session', CourseSessionController::class)->except('show')->shallow();
 
     Route::get('session/{session}/file', [CourseSessionController::class, 'fileUploader'])->name('session.file.index');
 
@@ -77,6 +77,12 @@ Route::group(['prefix' => 'course', 'middleware' => ['auth']], function() {
     Route::get('list', [CourseController::class, 'myCourses'])->name('my_courses');
 
     Route::post('buy/{course}', [PurchaseController::class, 'buy'])->name('course.buy');
+
+});
+
+Route::group(['prefix' => 'session', 'middleware' => ['auth']], function() {
+    
+    Route::get('/{session}', [CourseSessionController::class, 'show'])->name('session.show');
 
 });
 

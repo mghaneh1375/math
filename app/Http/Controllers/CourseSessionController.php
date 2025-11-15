@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCourseSessionRequest;
 use App\Http\Requests\FileUploadRequest;
 use App\Http\Resources\AdminCourseSessionDigestResource;
+use App\Http\Resources\PurchasedCourseFullSessionResource;
+use App\Http\Resources\PurchasedCourseSessionResource;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -117,9 +119,11 @@ class CourseSessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CourseSession $session)
+    public function show(CourseSession $session, Request $request)
     {
-        //
+        return view('public.course.session.show', [
+            'session' => PurchasedCourseFullSessionResource::make($session)->toArray($request)
+        ]);
     }
 
     /**
