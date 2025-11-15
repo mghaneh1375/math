@@ -45,7 +45,8 @@
                     @if(!$is_owner)
                         <div class="d-flex f-row justify-content-end">
                             @if(Auth::check())
-                                <form method="post" accept="{{ route('course.buy', ['course' => $item['id']]) }}">
+                                <form method="post" action="{{ route('course.buy', ['course' => $item['id']]) }}">
+                                    @csrf
                                     <button type="submit" class="btn btn-primary">خرید دوره</button>
                                 </form>
                             @else
