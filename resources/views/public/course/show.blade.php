@@ -85,7 +85,7 @@
                         </div>
                         <?php array_push($chapters, $session['chapter']) ?>
                 @else
-                    <div class="session">
+                    <div onclick="window.location.href = '{{route('session.show', ['session' => $session['id']])}}'" class="session">
                         <p>{{ $session['title'] }}</p>
                         <div class="d-flex f-row g-10">
                             <p>{{ $session['duration'] }}</p>
