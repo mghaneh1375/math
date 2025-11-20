@@ -147,7 +147,7 @@ class AuthController extends Controller
             $activation->token = Str::random(30);
             $activation->save();
             
-            sendSMS($request['username'], $activationCode, "registry");
+            sendSMS($request['username'], $activationCode, "activation");
         }
         
         return redirect()->route('activate_account', ['activation' => $activation->id]);
